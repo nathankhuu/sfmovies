@@ -16,8 +16,15 @@
     "nodemon": "^1.17.4"
   },
   "scripts": {
-    "lint": "eslint .",
     "start": "nodemon --ignore test/",
+    "lint": "eslint .",
+    "db:migrate": "knex migrate:latest --knexfile db/index.js",
+    "db:migrate:make": "knex migrate:make --knexfile db/index.js",
+    "db:reset": "if [ \"$NODE_ENV\" != \"production\" ]; then dropdb $(node -p \"require('./config').DB_NAME\"); yarn run db:setup && yarn run db:migrate; fi",
+    "db:rollback": "knex migrate:rollback --knexfile db/index.js",
+    "db:setup": "if [ \"$NODE_ENV\" != \"production\" ]; then createdb -O $(node -e \"var c = require('./config'); console.log(c.DB_USER, c.DB_NAME);\"); fi",
+    "db:setup:user": "if [ \"$NODE_ENV\" != \"production\" ]; then createuser $(node -p \"require('./config').DB_USER\"); fi",
+    "db:seed": "yarn db:reset && knex seed:run --knexfile db/index.js",
     "release:patch": "changelog -p && git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version patch && git push origin && git push origin --tags",
     "release:minor": "changelog -m && git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version minor && git push origin && git push origin --tags",
     "release:major": "changelog -M && git add CHANGELOG.md && git commit -m 'updated CHANGELOG.md' && npm version major && git push origin && git push origin --tags",
@@ -26,6 +33,10 @@
     "test:raw": "NODE_ENV=test mocha test --require test/setup.js --recursive --timeout 30000"
   },
   "dependencies": {
-    "hapi": "14.2.0"
+    "bookshelf": "^0.13.3",
+    "hapi": "14.2.0",
+    "hapi-bookshelf-serializer": "^2.1.0",
+    "knex": "^0.14.6",
+    "pg": "^7.4.3"
   }
 }
