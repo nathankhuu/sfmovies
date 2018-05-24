@@ -12,6 +12,7 @@ describe('movie model', () => {
       expect(movie).to.have.all.keys([
         'id',
         'title',
+        'name',
         'release_year',
         'object'
       ]);
