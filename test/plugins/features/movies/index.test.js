@@ -4,8 +4,8 @@ const Knex         = require('../../../../lib/libraries/knex');
 const MovieFactory = require('../../../../test/factories/movie');
 const Movies       = require('../../../../lib/server');
 
-const movieOne = MovieFactory.build({ title: 'One', release_year: 2000 });
-const movieTwo = MovieFactory.build({ title: 'Two', release_year: 2010 });
+const movieOne = MovieFactory.build({ name: 'One', release_year: 2000 });
+const movieTwo = MovieFactory.build({ name: 'Two', release_year: 2010 });
 
 describe('movies integration', () => {
 
