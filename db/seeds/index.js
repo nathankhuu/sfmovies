@@ -1,7 +1,7 @@
 'use strict';
 
-const Locations       = require('./data/locations')
-const LocationsMovies = require('./data/locations-movies')
+const Locations       = require('./data/locations');
+const LocationsMovies = require('./data/locations-movies');
 const Movies          = require('./data/movies');
 
 exports.seed = (Knex) => {
