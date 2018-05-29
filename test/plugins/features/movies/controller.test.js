@@ -4,8 +4,8 @@ const Controller   = require('../../../../lib/plugins/features/movies/controller
 const Knex         = require('../../../../lib/libraries/knex');
 const MovieFactory = require('../../../../test/factories/movie');
 
-const movieOne = MovieFactory.build({ title: 'One', release_year: 2000 });
-const movieTwo = MovieFactory.build({ title: 'Two', release_year: 2010 });
+const movieOne = MovieFactory.build({ name: 'One', release_year: 2000 });
+const movieTwo = MovieFactory.build({ name: 'Two', release_year: 2010 });
 
 describe('movie controller', () => {
 
