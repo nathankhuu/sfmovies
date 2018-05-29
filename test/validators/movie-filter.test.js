@@ -13,8 +13,6 @@ describe('movie filter validator', () => {
         start_year: 1800
       };
       const result = Joi.validate(query, MovieFilterValidator);
-      console.log("HELLO WORLD");
-      console.log(result.error.details[0].path[0]);
       expect(result.error.details[0].path[0]).to.eql('start_year');
       expect(result.error.details[0].type).to.eql('number.min');
     });

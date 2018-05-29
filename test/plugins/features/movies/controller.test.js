@@ -44,8 +44,8 @@ describe('movie controller', () => {
       return Controller.list(query)
       .then((movies) => {
         expect(movies).to.have.lengthOf(1);
-      })
-    })
+      });
+    });
 
   });
 
