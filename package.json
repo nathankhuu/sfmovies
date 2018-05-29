@@ -13,7 +13,8 @@
     "generate-changelog": "^1.0.0",
     "istanbul": "^0.4.2",
     "mocha": "^2.2.5",
-    "nodemon": "^1.17.4"
+    "nodemon": "^1.17.4",
+    "rosie": "^2.0.1"
   },
   "scripts": {
     "start": "nodemon --ignore test/",

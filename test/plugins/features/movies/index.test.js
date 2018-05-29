@@ -1,8 +1,17 @@
 'use strict';
 
-const Movies = require('../../../../lib/server');
+const Knex         = require('../../../../lib/libraries/knex');
+const MovieFactory = require('../../../../test/factories/movie');
+const Movies       = require('../../../../lib/server');
+
+const movieOne = MovieFactory.build({ title: 'One', release_year: 2000 });
+const movieTwo = MovieFactory.build({ title: 'Two', release_year: 2010 });
 
 describe('movies integration', () => {
+
+  beforeEach(() => {
+    return Knex.raw('TRUNCATE movies CASCADE');
+  });
 
   describe('create', () => {
 
@@ -22,6 +31,10 @@ describe('movies integration', () => {
 
   describe('list', () => {
 
+    beforeEach(() => {
+      return Knex('movies').insert([movieOne, movieTwo]);
+    });
+
     it('lists all movies', () => {
       return Movies.inject({
         url: '/movies',
@@ -29,9 +42,10 @@ describe('movies integration', () => {
       })
       .then((response) => {
         expect(response.statusCode).to.eql(200);
+        expect(response.result[0].object).to.eql('movie');
       });
     });
 
-  })
+  });
 
 });
