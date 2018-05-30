@@ -47,6 +47,14 @@ describe('movie controller', () => {
       });
     });
 
+    it('filters movies by title', () => {
+      const query = { title: 'One' };
+      return Controller.list(query)
+      .then((movies) => {
+        expect(movies).to.have.lengthOf(1);
+      });
+    });
+
   });
 
 });
