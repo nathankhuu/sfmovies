@@ -34,8 +34,16 @@ describe('movie controller', () => {
 
     it('lists all movies', () => {
       return Controller.list()
-      .then((response) => {
-        expect(response).to.have.lengthOf(2);
+      .then((movies) => {
+        expect(movies).to.have.lengthOf(2);
+      });
+    });
+
+    it('filters movies by year', () => {
+      const query = { start_year: 2000, end_year: 2009 };
+      return Controller.list(query)
+      .then((movies) => {
+        expect(movies).to.have.lengthOf(1);
       });
     });
 
