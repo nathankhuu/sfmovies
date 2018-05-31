@@ -46,6 +46,18 @@ describe('movies integration', () => {
       });
     });
 
+    it('filters by fuzzy title', () => {
+      return Movies.inject({
+        url: '/movies?title=Ome',
+        method: 'GET'
+      })
+      .then((response) => {
+        expect(response.statusCode).to.eql(200);
+        expect(response.result[0].object).to.eql('movie');
+        expect(response.result[0].title).to.eql('One');
+      });
+    });
+
   });
 
 });
